@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import { RouterView } from 'vue-router'
+import NavMenu from './components/NavMenu.vue'
 </script>
 
 <template>
   <div class="page">
     <div class="sidebar">
-      <!-- <nav-menu /> -->
-      <h6>Nav-menu aqui</h6>
+      <NavMenu />
     </div>
 
     <main>
