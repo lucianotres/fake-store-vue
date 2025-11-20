@@ -4,6 +4,11 @@ body {
   margin: 0;
 }
 
+.nav-link {
+  --bs-nav-link-padding-y: 1rem;
+  --bs-nav-link-padding-x: 1rem;
+}
+
 h1:focus {
   outline: none;
 }
