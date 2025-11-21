@@ -1,9 +1,30 @@
 <script setup lang="ts">
-import ProdutoView from '@/components/ProdutoView.vue'
+import { onMounted } from 'vue'
+import { useProdutosStore } from '@/stores/produtos'
+import ProdutoListView from '@/components/ProdutoListView.vue'
+
+const store = useProdutosStore()
+
+// Alimenta a store ao abrir a página
+onMounted(() => {
+  store.fetchProdutos()
+})
 </script>
 
 <template>
-  <h1>Produtos</h1>
+  <div>
+    <h1>Lista de Produtos</h1>
 
-  <ProdutoView />
+    <div v-if="store.carregando">Carregando...</div>
+    <div v-else-if="store.erro">Erro: {{ store.erro }}</div>
+
+    <div v-else>
+      <ProdutoListView
+        v-for="produto in store.produtos"
+        :key="produto.id"
+        :product="produto"
+        :isSelecionar="true"
+      />
+    </div>
+  </div>
 </template>

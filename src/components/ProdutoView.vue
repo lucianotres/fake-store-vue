@@ -71,7 +71,7 @@
 
 <script setup lang="ts">
 import { reactive } from 'vue'
-import { Product } from '@/models/Produto'
+import type { Product } from '@/models/Produto'
 
 const product = reactive<Product>({} as Product)
 
