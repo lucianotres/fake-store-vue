@@ -10,10 +10,10 @@
       <div class="card-footer">
         <div>
           Preço: <strong>$ {{ formataPreco(props.product.price) }}</strong>
-          <!-- <p v-if="cotacao.Cotacao != null">
+          <span v-if="cotacaoStore.cotacao != null">
             &nbsp; em cotação:
-            <strong>@cotacao.Cotacao.ConvertFromUSD(product.Price)?.ToString("#,##0.00")</strong>
-          </p> -->
+            <strong>{{ formataPreco(valorCotado) }}</strong>
+          </span>
         </div>
         <button v-if="props.isSelecionar" class="btn btn-sm btn-primary" @click="Selecionar">
           Selecionar
@@ -53,6 +53,9 @@
 
 <script setup lang="ts">
 import type { Product } from '@/models/Produto'
+import { useCotacaoStore } from '@/stores/cotacao'
+import { calculaEmCotacao } from '@/utils/funcoes-uteis'
+import { computed } from 'vue'
 
 const props = withDefaults(
   defineProps<{
@@ -71,6 +74,15 @@ const emit = defineEmits<{
 }>()
 
 const formataPreco = (value: number) => value.toFixed(2).replace('.', ',')
+
+const cotacaoStore = useCotacaoStore()
+const valorCotado = computed(() => {
+  if (cotacaoStore.cotacao === null || cotacaoStore.cotacao.bid === undefined) {
+    return props.product.price
+  }
+
+  return calculaEmCotacao(props.product.price, cotacaoStore.cotacao.bid)
+})
 
 const Selecionar = () => emit('selecionar')
 const Editar = () => emit('editar')
