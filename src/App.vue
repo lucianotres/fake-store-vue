@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { RouterView } from 'vue-router'
 import NavMenu from './components/NavMenu.vue'
+import EscolhaCotacao from './components/EscolhaCotacao.vue'
 </script>
 
 <template>
@@ -12,7 +13,7 @@ import NavMenu from './components/NavMenu.vue'
     <main>
       <div class="top-row px-4 auth">
         <h6>UsuarioAutenticado</h6>
-        <h6>escolha-cotacao</h6>
+        <EscolhaCotacao />
       </div>
 
       <article class="content px-4">
